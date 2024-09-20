@@ -1,0 +1,110 @@
+// Définition de la classe Question
+class Question {
+  constructor(text, choices, answer) {
+    this.text = text; // Le texte de la question
+    this.choices = choices; // Les choix possibles
+    this.answer = answer; // La réponse correcte
+  }
+  isCorrectAnswer(choice) {
+    return choice === this.answer; // Vérifie si le choix est correct
+  }
+}
+
+// Tableau des questions avec leurs réponses
+const questions = [
+  new Question(
+    "Quelle méthode Javascript permet de filtrer les éléments d'un tableau",
+    ["indexOf()", "map()", "filter()", "reduce()"],
+    "filter()"
+  ),
+  new Question(
+    "Quelle méthode Javascript permet de vérifier si un élément figure dans un tableau",
+    ["isNaN()", "includes()", "findIndex()", "isOdd()"],
+    "includes()"
+  ),
+  new Question(
+    "Quelle méthode transforme du JSON en un objet Javascript ?",
+    ["JSON.parse()", "JSON.stringify()", "JSON.object()", "JSON.toJS"],
+    "JSON.parse()"
+  ),
+  new Question(
+    "Quel objet Javascript permet d'arrondir à l'entier le plus proche",
+    ["Math.ceil()", "Math.floor()", "Math.round()", "Math.random()"],
+    "Math.round()"
+  ),
+];
+
+// Définition de la classe Quiz
+class Quiz {
+  constructor(questions) {
+    this.score = 0; // Initialisation du score
+    this.questions = questions; // Tableau des questions
+    this.currentQuestionIndex = 0; // Index de la question en cours
+  }
+  getCurrentQuestion() {
+    return this.questions[this.currentQuestionIndex]; // Récupère la question actuelle
+  }
+  guess(answer) {
+    if (this.getCurrentQuestion().isCorrectAnswer(answer)) {
+      this.score++; // Incrémente le score si la réponse est correcte
+    }
+    this.currentQuestionIndex++; // Passe à la question suivante
+  }
+  hasEnded() {
+    return this.currentQuestionIndex >= this.questions.length; // Vérifie si le quiz est terminé
+  }
+}
+
+// Affichage du quiz
+const display = {
+  elementShown: function (id, text) {
+    let element = document.getElementById(id);
+    element.innerHTML = text;
+  },
+  question: function () {
+    this.elementShown("question", quiz.getCurrentQuestion().text); // Affiche la question actuelle
+  },
+  choices: function () {
+    let choices = quiz.getCurrentQuestion().choices; // Récupère les choix possibles
+
+    guessHandler = (id, guess) => {
+      document.getElementById(id).onclick = function () {
+        quiz.guess(guess);
+        quizApp();
+      };
+    };
+    // Affichage des choix et gestion des réponses
+    for (let i = 0; i < choices.length; i++) {
+      this.elementShown("choice" + i, choices[i]);
+      guessHandler("guess" + i, choices[i]);
+    }
+  },
+  progress: function () {
+    this.elementShown(
+      "progress",
+      `Question ${quiz.currentQuestionIndex + 1} sur ${quiz.questions.length}`
+    ); // Affiche la progression du quiz
+  },
+  endQuiz: function () {
+    let endQuizHTML = `
+      <h1>Quiz terminé !</h1>
+      <h3>Votre score est de : ${quiz.score} / ${quiz.questions.length}</h3>
+    `;
+    this.elementShown("quiz", endQuizHTML); // Affiche la fin du quiz avec le score
+  },
+};
+
+// Logique du jeu
+quizApp = () => {
+  if (quiz.hasEnded()) {
+    display.endQuiz(); // Si le quiz est terminé, affiche la fin du quiz
+  } else {
+    display.question();
+    display.choices();
+    display.progress(); // Sinon, affiche la question, les choix et la progression
+  }
+};
+
+// Création du quiz
+let quiz = new Quiz(questions);
+quizApp();

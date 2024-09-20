@@ -1,0 +1,86 @@
+/* Importation de la police de caractères */
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap");
+
+/* Réinitialisation des styles */
+* {
+  font-family: "Josefin Sans", sans-serif; /* Police de caractères par défaut */
+  box-sizing: border-box; /* Boîte de modèle border-box */
+  margin: 0; /* Réinitialisation de la marge */
+  padding: 0; /* Réinitialisation du remplissage */
+  text-align: center; /* Alignement du texte au centre */
+}
+
+/* Styles pour le corps de la page */
+body {
+  display: grid; /* Affichage en grille */
+  align-items: center; /* Centrage vertical des éléments */
+  justify-items: center; /* Centrage horizontal des éléments */
+  min-height: 100vh; /* Hauteur minimale de la fenêtre */
+  background: #2f3542; /* Couleur de fond */
+  color: #dfe4ea; /* Couleur du texte */
+}
+
+/* Styles pour les titres h1 */
+body h1 {
+  margin-bottom: 3rem; /* Marge en bas du titre */
+  text-transform: uppercase; /* Transformation en majuscules */
+  font-size: 3rem; /* Taille de police */
+}
+
+/* Styles pour les éléments de couleur spécifique dans les titres h1 */
+body h1 span,
+body h1 i {
+  color: #ffa502; /* Couleur spécifique */
+}
+
+/* Styles pour les titres h3 */
+body h3 {
+  color: #ffa502; /* Couleur spécifique */
+  font-size: 1.5rem; /* Taille de police */
+}
+
+/* Styles pour les choix des boutons */
+body .container .choices {
+  display: flex; /* Affichage en flexbox */
+  flex-wrap: wrap; /* Enroulement sur plusieurs lignes */
+  margin: 3rem auto 3rem; /* Marge autour des choix */
+  width: 500px; /* Largeur des choix */
+}
+
+/* Styles pour les boutons de choix */
+body .container .choices button {
+  flex: 1 0 45%; /* Propriétés flex */
+  width: 200px; /* Largeur */
+  height: 80px; /* Hauteur */
+  border-radius: 5px; /* Bordure arrondie */
+  cursor: pointer; /* Curseur en pointeur */
+  border: none; /* Pas de bordure */
+  margin: 0.4rem; /* Marge */
+  outline: none; /* Pas de contour */
+  background: #dfe4ea; /* Couleur de fond */
+  user-select: none; /* Interdiction de la sélection du texte */
+  font-weight: 600; /* Poids de la police */
+}
+
+/* Styles au survol des boutons de choix */
+body .container .choices button:hover {
+  background: #ffa502; /* Changement de couleur de fond */
+  transition: 0.5s; /* Animation de transition */
+}
+
+/* Styles lors de l'appui sur les boutons de choix */
+body .container .choices button:active {
+  transform: scale(0.9); /* Réduction de la taille */
+  transition: transform 0.1s; /* Animation de transition */
+}
+
+/* Styles pour le texte de description des boutons */
+body .container .choices button p {
+  font-size: 1.3rem; /* Taille de police */
+}
+
+/* Styles pour la progression */
+body #progress {
+  font-size: 1.3rem; /* Taille de police */
+  color: #ffa502; /* Couleur */
+}
